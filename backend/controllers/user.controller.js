@@ -244,7 +244,11 @@ export async function uploadAvatar(request,response){
 //update user details
 
 export async function updateUserDetails(request,response){
-    
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 
 
