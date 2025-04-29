@@ -1,16 +1,23 @@
 import React from 'react'
 import logo from '../assets/logo.png'
 import Search from './Search'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaUserCircle } from "react-icons/fa";
 import { useMobile } from '../hooks/useMobile'
+import { FaCartShopping } from "react-icons/fa6";
+
 
 
 const Header = () => {
   const [isMobile] = useMobile();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isSearchPage = location.pathname === '/search';
+
+  const redirectToLoginPage = () => {
+    navigate('/login');
+  }
 
   return (
     <div>
@@ -44,12 +51,26 @@ const Header = () => {
               </div>
 
               {/* login and my cart */}
-              <div>
+              <div className=''>
+                {/* user icons display in only mobile version */}
                 <button className='text-neutral-600 lg:hidden flex items-center justify-center h-12 w-12 rounded-full hover:bg-slate-100 transition-all duration-200 ease-in-out'>
                   <FaUserCircle size={27}/>
                 </button>
-                <div className='hidden lg:block'>
-                  login and my cart
+
+                {/*Desktop version */}
+
+                <div className='hidden lg:flex items-center gap-10'>
+                  <button onClick={redirectToLoginPage} className='text-lg px-2 '>
+                    Login</button>
+                  <button className='flex items-center gap-2 h-12 w-32 rounded bg-green-800 text-white px-3 py-3 hover:bg-green-700 transition-all duration-200 ease-in-out'>
+                    {/* add to cart icon */}
+                    <div className='animate-bounce'>
+                      <FaCartShopping size={26}/>
+                    </div>
+                    <div className='font-semibold'>
+                      <p>My Cart</p>
+                    </div>
+                  </button>
                 </div>
               </div>
 
